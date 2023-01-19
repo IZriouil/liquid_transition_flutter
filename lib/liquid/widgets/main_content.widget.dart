@@ -105,27 +105,30 @@ class _MainContentWidgetState extends State<MainContentWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ..._selectedFriends.map((friend) {
-                            return InkWell(
-                              onTap: () {
-                                if (mounted) {
-                                  setState(() {
-                                    _selectedFriends.remove(friend);
-                                  });
-                                }
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: AvatarWidget(
-                                  friend: friend,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ..._selectedFriends.map((friend) {
+                              return InkWell(
+                                onTap: () {
+                                  if (mounted) {
+                                    setState(() {
+                                      _selectedFriends.remove(friend);
+                                    });
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: AvatarWidget(
+                                    friend: friend,
+                                  ),
                                 ),
-                              ),
-                            );
-                          }).toList()
-                        ],
+                              );
+                            }).toList()
+                          ],
+                        ),
                       ),
                       Text(
                         "Invite Friends",

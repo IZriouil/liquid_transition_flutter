@@ -30,28 +30,30 @@ class _LiquidApplicationState extends State<LiquidApplication> with SingleTicker
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              child: MainContentWidget(controller: _controller)),
-          ..._controller.friends
-              .map((friend) => OverlayElementWidget(
-                    index: _controller.friends.indexOf(friend),
-                    controller: _controller,
-                    friend: friend,
-                  ))
-              .toList(),
-          OverlayAvatarsWidget(
-            controller: _controller,
-          )
-          // OverlayElementWidget(
-          //   animation: _animation,
-          //   controller: _controller,
-          //   index: 0,
-          // )
-        ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(20),
+                child: MainContentWidget(controller: _controller)),
+            ..._controller.friends
+                .map((friend) => OverlayElementWidget(
+                      index: _controller.friends.indexOf(friend),
+                      controller: _controller,
+                      friend: friend,
+                    ))
+                .toList(),
+            OverlayAvatarsWidget(
+              controller: _controller,
+            )
+            // OverlayElementWidget(
+            //   animation: _animation,
+            //   controller: _controller,
+            //   index: 0,
+            // )
+          ],
+        ),
       ),
     );
   }
