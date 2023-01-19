@@ -50,10 +50,9 @@ class CurvePainter extends CustomPainter {
       ..color = Colors.white
       ..style = PaintingStyle.fill;
     Path path = Path();
-    _drawDrip(path, .15, size, .9, .18);
-    _drawDrip(path, .3, size, .6, .1);
-    _drawDrip(path, .58, size, .8, .15);
-    _drawDrip(path, .8, size, 1, .2);
+    _drawDrip(path, .15, size, .95, .24);
+    _drawDrip(path, .58, size, .9, .2);
+    _drawDrip(path, .8, size, 1, .22);
     canvas.drawPath(path, paint);
   }
 

@@ -18,7 +18,7 @@ class _OverlayAvatarsWidgetState extends State<OverlayAvatarsWidget> {
   void initState() {
     super.initState();
     _animation = Tween<double>(begin: 0.0, end: 1)
-        .animate(CurvedAnimation(parent: widget.controller.animationController, curve: Curves.easeIn));
+        .animate(CurvedAnimation(parent: widget.controller.animationController, curve: Curves.easeInSine));
   }
 
   @override
@@ -56,8 +56,8 @@ class _OverlayAvatarsWidgetState extends State<OverlayAvatarsWidget> {
                 return Positioned(
                   left: leftPosition,
                   top: topPosition,
-                  child: Opacity(
-                    opacity: 1,
+                  child: Transform.scale(
+                    scale: 1 + (_animation.value) * .4,
                     child: AvatarWidget(
                       friend: friend,
                     ),

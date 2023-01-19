@@ -90,9 +90,9 @@ class _MainContentWidgetState extends State<MainContentWidget> {
           animation: _animation,
           builder: ((context, child) {
             return AnimatedScale(
-              duration: const Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut,
-              scale: _animation.value > .4 ? 1.05 : 1,
+              scale: _animation.value > .4 ? 1.03 : 1,
               child: Container(
                 height: 200,
                 clipBehavior: Clip.none,

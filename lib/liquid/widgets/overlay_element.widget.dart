@@ -24,7 +24,7 @@ class _OverlayElementWidgetState extends State<OverlayElementWidget> {
   void initState() {
     super.initState();
     _animation = Tween<double>(begin: 0.0, end: 1).animate(CurvedAnimation(
-      curve: Curves.easeInOutSine,
+      curve: Curves.easeInOutQuad,
       parent: widget.controller.animationController,
     ));
   }
@@ -55,48 +55,57 @@ class _OverlayElementWidgetState extends State<OverlayElementWidget> {
           // double translation = pow(percentage, 2) * -4 + 4 * percentage;
           double translation = sin(2 * pi * percentage);
           double topOpacity = (.25 - .85) * percentage + .85;
-          return ShaderMask(
-              shaderCallback: (rect) {
-                return LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    widget.friend.color.withOpacity(topOpacity),
-                    widget.friend.color,
-                    // Color(0xFFC8DDBD),
-                    // Color(0xFFC8DDBD).withOpacity(percentage),
-                    Color(0xFFefdaa1)
-                    // Colors.white.withOpacity(.5)
-                  ],
-                  stops: [.2, .5, .8],
-                ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-              },
-              child: Container(
-                clipBehavior: Clip.none,
-                padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 20),
-                width: size.width,
-                height: heightWidget + 20,
-                // color: Colors.red.withOpacity(.5),
-                child: Stack(children: [
-                  Container(
-                    height: 80,
-                    transform: Transform.translate(offset: Offset(0, translation * 20)).transform,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  IgnorePointer(
-                      ignoring: true,
-                      child: CurvesBoxWidget(
-                        percentage: _animation.value,
-                        height: heightWidget - 80 * 2,
-                        scale: 1.2 + 0.09 * widget.index,
-                      )),
-                ]),
-              ));
+          return Stack(children: [
+            Transform.scale(
+                scaleY: 1.04,
+                child: Opacity(opacity: .6, child: _buildLayer(topOpacity, size, heightWidget, translation))),
+            _buildLayer(topOpacity, size, heightWidget, translation)
+          ]);
         },
       ),
     );
+  }
+
+  ShaderMask _buildLayer(double topOpacity, Size size, double heightWidget, double translation) {
+    return ShaderMask(
+        shaderCallback: (rect) {
+          return LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              widget.friend.color.withOpacity(topOpacity),
+              widget.friend.color,
+              // Color(0xFFC8DDBD),
+              // Color(0xFFC8DDBD).withOpacity(percentage),
+              Color(0xFFefdaa1)
+              // Colors.white.withOpacity(.5)
+            ],
+            stops: [.2, .5, .8],
+          ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+        },
+        child: Container(
+          clipBehavior: Clip.none,
+          padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(top: 20),
+          width: size.width,
+          height: heightWidget + 20,
+          // color: Colors.red.withOpacity(.5),
+          child: Stack(children: [
+            Container(
+              height: 80,
+              transform: Transform.translate(offset: Offset(0, translation * 20)).transform,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            IgnorePointer(
+                ignoring: true,
+                child: CurvesBoxWidget(
+                  percentage: _animation.value,
+                  height: heightWidget - 80 * 2,
+                  scale: 1.2 + 0.09 * widget.index,
+                )),
+          ]),
+        ));
   }
 }
