@@ -25,7 +25,7 @@ class _OverlayAvatarsWidgetState extends State<OverlayAvatarsWidget> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double topSpace = 20 + 32 + 20;
-    double bottomSpace = 20 + 100;
+    double bottomSpace = 20 + 160;
     double heightWidget = size.height - topSpace - bottomSpace;
     return Positioned(
       top: topSpace,
@@ -37,6 +37,7 @@ class _OverlayAvatarsWidgetState extends State<OverlayAvatarsWidget> {
             return Container(
               height: size.height - topSpace - bottomSpace,
               width: size.width,
+              // color: Colors.red.withOpacity(.5),
               child: Stack(
                   children: widget.controller.friends.map((friend) {
                 if (_animation.value == 0 || _animation.value == 1) {

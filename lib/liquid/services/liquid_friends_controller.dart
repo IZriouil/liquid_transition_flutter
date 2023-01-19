@@ -32,6 +32,6 @@ class LiquidFriendsController {
       duration: const Duration(milliseconds: 1000),
     );
 
-    _friends = FriendModel.generateFriends(count: 5);
+    _friends = FriendModel.generateFriends(count: 3);
   }
 }

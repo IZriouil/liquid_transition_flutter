@@ -36,7 +36,7 @@ class _OverlayElementWidgetState extends State<OverlayElementWidget> {
     double bottomSpace = 20 + 200 + 5;
     print("triggered");
 
-    double heightWidget = size.height - topSpace - bottomSpace + 80; // bottom space
+    double heightWidget = size.height - topSpace - bottomSpace + 80 - 80; // bottom space
     return Positioned(
       top: 20 + 32 + 20 + widget.index * (80 + 20) - 20,
       child: AnimatedBuilder(
@@ -75,9 +75,7 @@ class _OverlayElementWidgetState extends State<OverlayElementWidget> {
             colors: [
               widget.friend.color.withOpacity(topOpacity),
               widget.friend.color,
-              // Color(0xFFC8DDBD),
-              // Color(0xFFC8DDBD).withOpacity(percentage),
-              Color(0xFFefdaa1)
+              const Color(0xFFefdaa1)
               // Colors.white.withOpacity(.5)
             ],
             stops: [.2, .5, .8],
