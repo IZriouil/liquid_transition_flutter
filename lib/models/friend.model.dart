@@ -24,6 +24,10 @@ class FriendModel {
   // generator of random friends
   static List<FriendModel> generateFriends({int count = 10}) {
     final List<Color> colors = [
+      const Color(0xFFC8DDBD),
+      const Color(0xFFD0CADC),
+      const Color(0xFFEBD2CE),
+      const Color(0xFFF3ECD0),
       Colors.red,
       Colors.green,
       Colors.blue,
